@@ -6,19 +6,15 @@
   justify-content: center;
 
   .login__container {
-    
-    .login__text {
-      position: relative;
-      padding: 70px;
-      max-width: 310px;
-      margin: 0 auto;
-      text-align: center;
-      color: black;
+    position: relative;
+    padding: 70px;
+    max-width: 310px;
+    margin: 0 auto;
+    text-align: center;
+    color: black;
 
-      background-color: white;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     .input__submit {
       color: white;
@@ -33,6 +29,7 @@
     }
 
     p {
+      margin-top: 30px;
       font-size: 16px;
       color: #737373;
       cursor: pointer;
