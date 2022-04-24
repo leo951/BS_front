@@ -1,0 +1,14 @@
+.footer__main{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    font-size: 1.3em;
+    height: 80px;
+    width: 100%;
+    border-top: black solid 1px;
+
+    p{
+        color: black;
+    }
+}
