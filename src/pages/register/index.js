@@ -104,11 +104,7 @@ const Index = () => {
           />
 
           <input className="btn btn-black" value="M'inscrire" type="submit" />
-          {error ? (
-            <Message message={errorMessage} type={"error"} />
-          ) : (
-            ""
-          )}
+          {error && <Message message={errorMessage} type={"error"} />}
         </form>
       </div>
     </div>
