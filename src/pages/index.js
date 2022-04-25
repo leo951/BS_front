@@ -1,10 +1,20 @@
 import Head from "next/head";
 import { React, useState, useEffect } from "react";
+import Link from "next/link";
+
+import styles from "../styles/home.module.scss";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Je suis sur la page home</h1>
+    <div className={styles.home__container}>
+      <div className={styles.home__hero}>
+        <div className={styles.home__text}>
+          <h1>Vous recherchez une place ?</h1>
+          <Link href="/steps/step1">
+            <h3 className="btn btn-white">Cliquez ici</h3>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

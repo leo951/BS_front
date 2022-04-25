@@ -1,0 +1,32 @@
+.card__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+
+
+  .card__img {
+    img {
+      width: 200px;
+      height: 100px;
+      background-color: black;
+
+      border-radius: 0px;
+      transition-property: border-radius;
+      transition-duration: 0.5s;
+
+      &:hover {
+        border-radius: 5px;
+        transition-property: border-radius;
+        transition-duration: 0.5s;
+      }
+    }
+  }
+  .card__text {
+    margin-top: 10px;
+    text-align: center;
+    color: black;
+    font-size: 1em;
+  }
+}
