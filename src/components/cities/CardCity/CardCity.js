@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import styles from "./CardCity.module.scss";
 
-const CityProduct = (props) => {
+const CardCity = (props) => {
     const router = useRouter();
 
     const saveCity = async (id) => {
@@ -20,4 +20,4 @@ const CityProduct = (props) => {
   );
 };
 
-export default CityProduct;
+export default CardCity;
