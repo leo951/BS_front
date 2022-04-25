@@ -9,7 +9,7 @@ import GridCity from "../../../components/cities/GridCity/GridCity";
 import styles from "./step1.module.scss";
 
 const Index = () => {
-  const { loading, error, data, onCompleted } = useQuery(getCities);
+  const { loading, error, data } = useQuery(getCities);
   if (error) {
     return null;
   }

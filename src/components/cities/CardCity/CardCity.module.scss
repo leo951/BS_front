@@ -1,12 +1,13 @@
-.card__container {
+.card__component {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 50px;
+  cursor: pointer;
 
 
-  .card__img {
+  .card__container {
     img {
       width: 200px;
       height: 100px;

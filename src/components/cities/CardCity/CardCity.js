@@ -1,17 +1,21 @@
 import React, { useContext } from "react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "./CardCity.module.scss";
 
 const CityProduct = (props) => {
-    console.log("Je suis props = ",props);
+    const router = useRouter();
+
+    const saveCity = async (id) => {
+        await localStorage.setItem("city", id);
+        router.push("/steps/step2");
+    }
+
   return (
-    <div className={styles.card__container}>
-      <Link href={`/product/${props.isCity.id}`}>
-        <a className={styles.card__img}>
+    <div className={styles.card__component}>
+        <a className={styles.card__container} onClick={() => saveCity(props.isCity.id)}>
           <img src={props.isCity.img} />
           <p className={styles.card__text}>{props.isCity.name}</p>
         </a>
-      </Link>
     </div>
   );
 };
