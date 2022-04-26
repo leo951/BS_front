@@ -16,6 +16,7 @@ export const CartContextProvider = ({ children }) => {
 
   const context = {
     timeConvert,
+
   };
 
   return (

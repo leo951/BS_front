@@ -11,6 +11,8 @@
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@apollo/react-hooks": "^4.0.0",
+    "@mdi/js": "^6.6.96",
+    "@mdi/react": "^1.6.0",
     "dotenv": "^16.0.0",
     "graphql": "^16.3.0",
     "jwt-decode": "^3.1.2",
