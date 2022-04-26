@@ -16,10 +16,7 @@ const Index = () => {
   }, []);
 
   const { loading, error, data, onCompleted } = useQuery(getParking, {
-    variables: { id: parkingID },
-    onCompleted: (data) => {
-      console.log("Je suis data = ", data);
-    },
+    variables: { id: parkingID }
   });
   if (error) {
     console.log("je suis error = ", error);
