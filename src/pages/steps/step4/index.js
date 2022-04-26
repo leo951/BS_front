@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { getFloor } from "../../../graphql/queries/floors";
 
 import Titlepage from "../../../components/UI/Title/TitlePage";
-// import GridFloor from "../../../components/floors/GridFloor/GridFloor";
+import GridSpot from "../../../components/spots/GridSpot/GridSpot";
 
 import styles from "./step4.module.scss";
 
@@ -33,9 +33,9 @@ const Index = () => {
                 title={`Choississez une place à l'étage : ${data.getFloor.letter}`}
               />
             </div>
-            {/* <div className={styles.step3}>
-              <GridFloor floors={data.getParking.floors} />
-            </div> */}
+            <div className={styles.step4__content}>
+              <GridSpot spots={data.getFloor.spots} />
+            </div>
           </>
         )}
       </div>
