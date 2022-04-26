@@ -1,6 +1,7 @@
 .card__component {
   margin: 30px;
   cursor: pointer;
+  border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
 
@@ -8,17 +9,24 @@
     display: block;
     content: "";
     border-bottom: solid 1px #000000;
-    transform: scaleX(0);
+    transform: scaleX(1);
     transition: transform 250ms ease-in-out;
   }
   &:hover:after {
-    transform: scaleX(1);
+    transform: scaleX(0);
   }
+
+//   &:hover{
+//     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//     transition-property: box-shadow;
+//     transition-duration: 0.5s;
+//   }
 
   .card__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
   }
 }
