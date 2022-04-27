@@ -65,6 +65,7 @@ export default {
   },
 
   updateUser(token, user) {
+    console.log("Je suis user = ",user);
     return fetch(`${process.env.API_URL}users/update`, {
       method: "PUT",
       headers: {
@@ -72,7 +73,7 @@ export default {
         "content-type": "application/json",
       },
       body: JSON.stringify(user),
-    }).then((res) => res.json());
+    }).then((res) =>  res.json());
   },
   verifyToken(token) {
     return fetch(`${process.env.API_URL}verifytoken`, {
