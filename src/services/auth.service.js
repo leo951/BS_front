@@ -65,7 +65,6 @@ export default {
   },
 
   updateUser(token, user) {
-    console.log("Je suis user = ",user);
     return fetch(`${process.env.API_URL}users/update`, {
       method: "PUT",
       headers: {

@@ -12,42 +12,18 @@ const CardSpot = (props) => {
   const [spot, setSpot] = useState([]);
   const [user, setUser] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   const [isUpdate] = useMutation(updateSpot);
 
-  /**
-   * @todos : Faire un update de l'utilisateur avec l'id de la place de parking ... fait
-   * @todos : Faire un update de Spot
-   * @todos : mettre le setSpot dans le useEffect pour mettre a jour a chaque fois les données
-   * @todos : Faire en sorte que la place de l'utilisateur soit en orange
-   */
-
-  const selectSpot = async (spotID) => {
-    const token = localStorage.getItem("token");
+  useEffect(() => {
     authService
-      .updateUser(token, {"spot": spotID})
+      .getUser(token)
       .then((data) => {
-        setUser(data.user);
-        isUpdateSpot()
+        setUser(data);
       })
       .catch((err) => console.log(err));
-  };
-
-  const isUpdateSpot = () => {
-    console.log("Je suis spot.id = ",spot.id);
-    console.log("Je suis spot.number = ",spot.number);
-    console.log("Je suis spot.available = ",spot.available);
-    isUpdate({
-      variables: {
-        id: spot.id,
-        number: spot.number,
-        available: !spot.available,
-      },
-      onCompleted: (data) => {
-        console.log("Je suis data dans le update du spot = ", data);
-        setSpot(data.updateSpot);
-      },
-    });
-  };
+  }, [user]);
 
   const { loading, error, data, onCompleted } = useQuery(getSpot, {
     variables: { id: props.isSpot.id },
@@ -60,11 +36,53 @@ const CardSpot = (props) => {
     return null;
   }
 
+  const selectMySpot = (id) => {
+    isUpdateSpot(id);
+    updateUser(null);
+  };
+
+  const selectNewSpot = (id) => {
+    if (user.spot?._id == null) {
+      updateUser(id)
+      isUpdateSpot(id);
+    }else{
+      alert('Récuperer votre vehicule avant de choisir une autre place 😊')
+    }
+  }
+
+  const updateUser = (id) => {
+    authService
+      .updateUser(token, { spot: id })
+      .then((data) => {
+        setUser(data.user);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const isUpdateSpot = (id) => {
+    isUpdate({
+      variables: {
+        id: id,
+        number: spot.number,
+        available: !spot.available,
+      },
+      onCompleted: (data) => {
+        setSpot(data.updateSpot);
+      },
+    });
+  };
+
   return (
-    <div onClick={() => selectSpot(spot.id)} className={styles.card__component}>
+    <div className={styles.card__component}>
       <div className={styles.card__container}>
-        {spot.available == true ? (
-          <Cars rotate={180} color={"green"} />
+        {user.spot?._id == spot?.id ? (
+          <div onClick={() => selectMySpot(user.spot._id)}>
+            <Cars rotate={180} color={"orange"} />
+          </div>
+        ) : spot.available == true ? (
+          <div onClick={() => selectNewSpot(spot.id)}>
+            <Cars rotate={180} color={"green"} />
+          </div>
         ) : (
           <Cars rotate={180} color={"red"} />
         )}
