@@ -36,6 +36,13 @@ const HeaderToolbar = () => {
           </p>
         )}
       </div>
+      {user.isAdmin == true && (
+        <div className={styles.header__admin}>
+          <Link href="/admin">
+            <p>Admin</p>
+          </Link>
+        </div>
+      )}
       <div className={styles.profilLogo}>
         {token == false ? (
           <Link href="/login">
