@@ -1,25 +1,66 @@
-.logoForNav{
-    font-size: 25px;
-    transition-property: font-size;
-    transition-duration: 1s;
+.logo__container {
+  button {
+    cursor: pointer;
+    background: none;
+    border: 0;
+    box-sizing: border-box;
+    margin: 1em;
+    padding: 1em 2em;
 
-    font-weight: bold;
+    box-shadow: inset 0 0 0 2px black;
     color: black;
-    text-transform: uppercase;
+    font-size: inherit;
+    font-weight: 700;
 
-    @media screen and (max-width: 740px) {
-       font-size: 15px;
-      }
+    position: relative;
+    vertical-align: middle;
 
-    &:hover{
-        font-size: 30px;
-        transition-property: font-size;
-        transition-duration: 1s;
+    &::before,
+    &::after {
+      box-sizing: inherit;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
     }
+  }
+
+  .logoForNav {
+    &:hover {
+      color: rgb(115, 164, 160);
+    }
+
+    &:before,
+    &:after {
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform-origin: center;
+    }
+
+    &:before {
+      border-top: 2px solid rgb(115, 164, 160);
+      border-bottom: 2px solid rgb(115, 164, 160);
+      transform: scale3d(0, 1, 1);
+    }
+
+    &:after {
+      border-left: 2px solid rgb(115, 164, 160);
+      border-right: 2px solid rgb(115, 164, 160);
+      transform: scale3d(1, 0, 1);
+    }
+
+    &:hover:before,
+    &:hover:after {
+      transform: scale3d(1, 1, 1);
+      transition: transform 0.5s;
+    }
+  }
 }
 
-.logo{
-    font-weight: bold;
-    color: black;
-    text-transform: uppercase;
+.logo {
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
 }
