@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import withAuth from "../../../HOC/withAuth";
+
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { getFloor } from "../../../graphql/queries/floors";
 
@@ -43,4 +45,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default withAuth(Index);

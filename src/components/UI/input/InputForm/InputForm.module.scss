@@ -7,6 +7,11 @@
     border: 1px solid black;
     transition: 0.3s all;
 
+    @media screen and (max-width: 480px) {
+      height: 30px;
+      width: 220px;
+     }
+
     &::placeholder {
       position: absolute;
       top: 35%;

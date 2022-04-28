@@ -1,6 +1,8 @@
 import React from "react";
 import HeaderLogo from "../HeaderLogo/HeaderLogo";
 
+import Link from "next/link";
+
 import styles from "./HeaderMenu.module.scss";
 
 const Headermenu = () => {
@@ -8,17 +10,13 @@ const Headermenu = () => {
     <nav>
       <ul className={styles.header__menu}>
         <li>
-          <HeaderLogo />
+            <HeaderLogo />
         </li>
         <>
           <li>
-            <p>Acceuil</p>
-          </li>
-          <li>
-            <p>A definir</p>
-          </li>
-          <li>
-            <p>A définir</p>
+            <Link href="/steps/step1">
+              <p>Choisir une place</p>
+            </Link>
           </li>
         </>
       </ul>

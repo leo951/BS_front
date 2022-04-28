@@ -9,6 +9,17 @@
   font-size: 2em;
   background-color: white;
   border-bottom: solid black 1px;
+
+  @media screen and (max-width: 610px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+   }
+   @media screen and (max-width: 376px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+   }
   ul {
     list-style-type: none;
     padding: 0px 0px 0px 55px;

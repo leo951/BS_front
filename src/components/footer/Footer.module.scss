@@ -7,8 +7,17 @@
     height: 80px;
     width: 100%;
     border-top: black solid 1px;
+    // margin-top: 30px;
+
+    @media screen and (max-width: 454px) {
+        font-size: 0.9em;
+       }
 
     p{
         color: black;
+
+        @media screen and (max-width: 454px) {
+            font-size: 0.7em;
+           }
     }
 }

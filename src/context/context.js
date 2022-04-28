@@ -1,22 +1,35 @@
 import { createContext } from "react";
+import authService from "../services/auth.service";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { updateSpot } from "../graphql/mutations/spots";
+
 
 const CartContext = createContext({
-  timeConvert: () => {},
+  removeSpot: () => {}
 });
 
 export const CartContextProvider = ({ children }) => {
-  function timeConvert(n) {
-    var num = n;
-    var hours = num / 60;
-    var rhours = Math.floor(hours);
-    var minutes = (hours - rhours) * 60;
-    var rminutes = Math.round(minutes);
-    return rhours + " h " + rminutes + " min";
-  }
+  const [isUpdate] = useMutation(updateSpot);
+  var user = {}
+  
+  const removeSpot = (spotID) => {
+    console.log("Je suis bien dans remove");
+    const token = localStorage.getItem("token");
+    isUpdate({
+      variables: {
+        id: spotID,
+        available: true,
+      },
+      onCompleted: (data) => {
+        console.log("Je suis dans le completed");
+        authService.updateUser(token, { spot: null }).then((data) => console.log("Je suis dans le then"))
+        .catch((err) => console.log(err));
+      },
+    });
+  };
 
   const context = {
-    timeConvert,
-
+    removeSpot,
   };
 
   return (

@@ -7,6 +7,10 @@
     color: black;
     text-transform: uppercase;
 
+    @media screen and (max-width: 740px) {
+       font-size: 15px;
+      }
+
     &:hover{
         font-size: 30px;
         transition-property: font-size;

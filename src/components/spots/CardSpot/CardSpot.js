@@ -60,6 +60,7 @@ const CardSpot = (props) => {
   };
 
   const isUpdateSpot = (id) => {
+    console.log("Je suis spot.available = ",spot.available);
     isUpdate({
       variables: {
         id: id,

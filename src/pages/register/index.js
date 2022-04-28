@@ -26,7 +26,7 @@ const Index = () => {
           return;
         }
         localStorage.setItem("token", data.token);
-        router.push("/profil");
+        router.push("/");
       })
       .catch((err) => {
         console.log(err);

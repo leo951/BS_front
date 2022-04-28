@@ -1,10 +1,11 @@
 import React from "react";
 import Logo from "../../logo/Logo";
 
+
 const Headerlogo = () => {
   return (
     <div>
-      <Logo forNav={true} />
+        <Logo forNav={true} />
     </div>
   );
 };

@@ -28,7 +28,7 @@ const Index = () => {
           return false;
         }
         localStorage.setItem("token", data.token);
-        // router.push({pathname: "/home"});
+        router.push({pathname: "/"});
       })
       .catch((err) => {
         console.log(err);

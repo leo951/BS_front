@@ -5,12 +5,18 @@
   align-items: center;
   width: 100%;
   position: relative;
-  
+
   li {
     font-size: 0.7em;
-    
-    p{
+
+    p {
       color: black;
+
+      @media screen and (max-width: 1000px) {
+        display: none;
+      }
     }
   }
 }
+
+

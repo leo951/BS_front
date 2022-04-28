@@ -14,5 +14,14 @@
 
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    @media screen and (max-width: 500px) {
+      padding: 50px;
+      max-width: 280px;
+    }
+    @media screen and (max-width: 405px) {
+      padding: 40px;
+      max-width: 260px;
+    }
   }
 }
