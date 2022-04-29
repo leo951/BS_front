@@ -20,7 +20,6 @@ const Index = () => {
   const { loading, error, data, onCompleted } = useQuery(getCity, {
     variables: { id: cityID },
     onCompleted: (data) => {
-      console.log("Je suis data = ", data);
     },
   });
   if (error) {

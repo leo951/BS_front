@@ -13,7 +13,6 @@ export const CartContextProvider = ({ children }) => {
   var user = {}
   
   const removeSpot = (spotID) => {
-    console.log("Je suis bien dans remove");
     const token = localStorage.getItem("token");
     isUpdate({
       variables: {
@@ -21,8 +20,7 @@ export const CartContextProvider = ({ children }) => {
         available: true,
       },
       onCompleted: (data) => {
-        console.log("Je suis dans le completed");
-        authService.updateUser(token, { spot: null }).then((data) => console.log("Je suis dans le then"))
+        authService.updateUser(token, { spot: null })
         .catch((err) => console.log(err));
       },
     });

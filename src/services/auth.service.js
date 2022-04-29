@@ -9,7 +9,6 @@ export default {
     }).then((res) => res.json());
   },
   login(user) {
-    console.log("Je suis user = ",user);
     return fetch(`${process.env.API_URL}users/login`, {
       method: "POST",
       headers: {
@@ -19,7 +18,6 @@ export default {
     }).then((res) => res.json());
   },
   sendEmail(user) {
-    console.log("Je suis dans auth = ", user);
     return fetch(`${process.env.API_URL}userSendMail`, {
       method: "POST",
       headers: {

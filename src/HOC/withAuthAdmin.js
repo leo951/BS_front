@@ -12,7 +12,6 @@ const withAuthAdmin = (WrappedComponent) => {
       authService
         .verifyAdmin(token)
         .then((data) => {
-          console.log(data);
           if (data.admin == true) {
             setVerify(true);
           } else {
