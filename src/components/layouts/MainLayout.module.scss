@@ -10,15 +10,10 @@
   background-color: white;
   // border-bottom: solid black 1px;
 
-  @media screen and (max-width: 610px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-   }
-   @media screen and (max-width: 376px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  @media screen and (max-width: 1110px) {
+    justify-content: center;
+    padding: 30px;
+    margin-bottom: 30px;
    }
   ul {
     list-style-type: none;
