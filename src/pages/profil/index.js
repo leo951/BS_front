@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from "react";
 import TitlePage from "../../components/UI/Title/TitlePage";
-import authService from "../../services/auth.service";
 import Input from "../../components/UI/input/InputForm/InputForm";
 import styles from "./profil.module.scss";
 import Message from "../../components/UI/Message/Message";
 import withAuth from "../../HOC/withAuth";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getOneUser } from "../../store/actions/User/getUser";
+import { updateUser } from "../../store/actions/User/updateUser";
 
 const Index = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
   const [success, setSuccess] = useState(false);
 
+  const isUser = useSelector((state) => state.getUser.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-
-    authService
-      .updateUser(token, JSON.parse(JSON.stringify(user)))
-      .then((data) => {
-        setSuccess(true);
-        setUser(data.user);
-      })
-      .catch((err) => console.log(err));
+    dispatch(updateUser(token, JSON.parse(JSON.stringify(user))))
+    setSuccess(true)
   };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    authService
-      .getUser(token)
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    dispatch(getOneUser(token));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setUser(isUser);
+  }, [isUser]);
 
   const disconnect = () => {
     localStorage.removeItem("token");
@@ -76,13 +74,18 @@ const Index = () => {
               setUser({ ...user, email: e.target.value });
             }}
           />
-          <input type="submit" value="Modifier votre profil" className="btn btn-black" />
+          <input
+            type="submit"
+            value="Modifier votre profil"
+            className="btn btn-black"
+          />
           <input
             type="button"
             value="deconnection"
             onClick={disconnect}
             className="btn btn-white"
           />
+
           {success ? (
             <Message type="success" message="votre profil a bien été modifié" />
           ) : (
@@ -94,4 +97,4 @@ const Index = () => {
   );
 };
 
-export default withAuth(Index);
+export default withAuth(Index) ;

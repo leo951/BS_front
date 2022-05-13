@@ -13,6 +13,10 @@ import getSpots from "./Spot/getSpots";
 import getSpot from "./Spot/getSpot";
 import updateSpot from "./Spot/updateSpot";
 
+
+import getUser from "./User/getUser";
+import updateUser from "./User/updateUser";
+
 export default combineReducers({
   getCities,
   getCity,
@@ -22,5 +26,7 @@ export default combineReducers({
   getParking,
   getSpots,
   getSpot,
-  updateSpot
+  updateSpot,
+  getUser,
+  updateUser
 });

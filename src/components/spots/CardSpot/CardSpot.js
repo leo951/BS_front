@@ -2,28 +2,32 @@ import React, { useEffect, useState } from "react";
 
 import Cars from "../../svg/Svg";
 import styles from "./CardSpot.module.scss";
-import authService from "../../../services/auth.service";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getOneUser } from "../../../store/actions/User/getUser";
+import { updateUser } from "../../../store/actions/User/updateUser";
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { getSpot } from "../../../graphql/queries/spots";
 import { updateSpot } from "../../../graphql/mutations/spots";
 
 const CardSpot = (props) => {
+  const dispatch = useDispatch();
   const [spot, setSpot] = useState([]);
   const [user, setUser] = useState([]);
 
+  const isUser = useSelector((state) => state.getUser.user);
   const token = localStorage.getItem("token");
 
   const [isUpdate] = useMutation(updateSpot);
 
   useEffect(() => {
-    authService
-      .getUser(token)
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => console.log(err));
-  }, [user]);
+    dispatch(getOneUser(token));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setUser(isUser);
+  }, [isUser]);
 
   const { loading, error, data, onCompleted } = useQuery(getSpot, {
     variables: { id: props.isSpot.id },
@@ -38,29 +42,26 @@ const CardSpot = (props) => {
 
   const selectMySpot = (id) => {
     isUpdateSpot(id);
-    updateUser(null);
+    isUpdateUser(null);
   };
 
   const selectNewSpot = (id) => {
     if (user.spot?._id == null) {
-      updateUser(id)
+      isUpdateUser(id);
       isUpdateSpot(id);
-    }else{
-      alert('Récuperer votre vehicule avant de choisir une autre place 😊')
+    } else {
+      alert("Récuperer votre vehicule avant de choisir une autre place 😊");
     }
-  }
+  };
 
-  const updateUser = (id) => {
-    authService
-      .updateUser(token, { spot: id })
-      .then((data) => {
-        setUser(data.user);
-      })
-      .catch((err) => console.log(err));
+  const isUpdateUser = (id) => {
+    console.log("je suis le spotID pour le USER = ",id);
+    dispatch(updateUser(token, { spot: id }));
+    dispatch(getOneUser(token));
   };
 
   const isUpdateSpot = (id) => {
-    console.log("Je suis spot.available = ",spot.available);
+    console.log("Je suis le sportId pour le SPOT = ",id);
     isUpdate({
       variables: {
         id: id,
@@ -75,20 +76,22 @@ const CardSpot = (props) => {
 
   return (
     <div className={styles.card__component}>
-      <div className={styles.card__container}>
-        {user.spot?._id == spot?.id ? (
-          <div onClick={() => selectMySpot(user.spot._id)}>
-            <Cars rotate={180} color={"orange"} />
-          </div>
-        ) : spot.available == true ? (
-          <div onClick={() => selectNewSpot(spot.id)}>
-            <Cars rotate={180} color={"green"} />
-          </div>
-        ) : (
-          <Cars rotate={180} color={"red"} />
-        )}
-        <p>{spot.number}</p>
-      </div>
+      {user && (
+        <div className={styles.card__container}>
+          {user.spot?._id == spot?.id ? (
+            <div onClick={() => selectMySpot(user.spot._id)}>
+              <Cars rotate={180} color={"orange"} />
+            </div>
+          ) : spot.available == true ? (
+            <div onClick={() => selectNewSpot(spot.id)}>
+              <Cars rotate={180} color={"green"} />
+            </div>
+          ) : (
+            <Cars rotate={180} color={"red"} />
+          )}
+          <p>{spot.number}</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import styles from "./HeaderToolbar.module.scss";
-import CartContext from "../../../context/context";
-import authService from "../../../services/auth.service";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { updateSpot } from "../../../graphql/mutations/spots";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getOneUser } from "../../../store/actions/User/getUser";
+import { updateUser } from "../../../store/actions/User/updateUser";
 
 import Link from "next/link";
 
 const HeaderToolbar = () => {
-  const { removeSpot } = useContext(CartContext);
+  const [isUpdate] = useMutation(updateSpot);
+  const dispatch = useDispatch();
+  const isUser = useSelector((state) => state.getUser.user);
 
   const [user, setUser] = useState([]);
   const [token, setToken] = useState(Boolean);
@@ -19,30 +25,48 @@ const HeaderToolbar = () => {
       setToken(false);
     }
     const token = localStorage.getItem("token");
-    authService
-      .getUser(token)
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => console.log(err));
-  }, [user]);
+    dispatch(getOneUser(token));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setUser(isUser);
+  }, [isUser]);
+
+  const removeSpot = (spotID) => {
+    isUpdate({
+      variables: {
+        id: spotID,
+        available: true,
+      },
+      onCompleted: (data) => {
+        dispatch(updateUser(token, { spot: null }));
+      },
+    });
+  };
 
   return (
     <div className={styles.header__toolbar}>
-      <div className={styles.header__spot}>
-        {user.spot != null && (
-          <p onClick={() => removeSpot(user.spot._id)}>
-            Cliquez pour récupérer votre véhicule
-          </p>
-        )}
-      </div>
-      {user.isAdmin == true && (
-        <div className={styles.header__admin}>
-          <Link href="/admin">
-            <p>Admin</p>
-          </Link>
-        </div>
+      {user && (
+        <>
+          <div className={styles.header__spot}>
+            {user.spot != null && (
+              <p onClick={() => removeSpot(user.spot._id)}>
+                Cliquez pour récupérer votre véhicule
+              </p>
+            )}
+          </div>
+          <div>
+            {user.isAdmin == true && (
+              <div className={styles.header__admin}>
+                <Link href="/admin">
+                  <p>Admin</p>
+                </Link>
+              </div>
+            )}
+          </div>
+        </>
       )}
+
       <div className={styles.profilLogo}>
         {token == false ? (
           <Link href="/login">

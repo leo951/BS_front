@@ -9,15 +9,15 @@ import { CartContextProvider } from "../context/context";
 
 function MyApp({ Component, pageProps, ...appProps }) {
   return (
-    // <ApolloProvider client={client}>
-    <Provider store={store}>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
       <CartContextProvider>
         <MainLayout>
           <Component {...pageProps} />
         </MainLayout>
       </CartContextProvider>
       </Provider>
-    // </ApolloProvider>
+    </ApolloProvider>
   );
 }
 
