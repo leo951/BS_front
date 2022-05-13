@@ -33,6 +33,7 @@ const HeaderToolbar = () => {
   }, [isUser]);
 
   const removeSpot = (spotID) => {
+    const token = localStorage.getItem("token");
     isUpdate({
       variables: {
         id: spotID,

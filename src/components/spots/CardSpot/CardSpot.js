@@ -55,13 +55,11 @@ const CardSpot = (props) => {
   };
 
   const isUpdateUser = (id) => {
-    console.log("je suis le spotID pour le USER = ",id);
     dispatch(updateUser(token, { spot: id }));
     dispatch(getOneUser(token));
   };
 
   const isUpdateSpot = (id) => {
-    console.log("Je suis le sportId pour le SPOT = ",id);
     isUpdate({
       variables: {
         id: id,
